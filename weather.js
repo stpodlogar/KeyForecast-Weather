@@ -4,8 +4,14 @@ const API_KEY = '8d806538f88014f91bc539358457b4a8';
 
 async function getWeather(city) {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=imperial&q=${city}&appid=${API_KEY}`)
-    console.log(response);
+    console.log(response.status);
 
+    if (response.status === 404) {
+        document.querySelector('.error').textContent = "Please enter a valid city";
+    }
+    else {
+        document.querySelector('.error').textContent = "";
+    }
     const data = await response.json();
     console.log(data);
 
@@ -14,11 +20,9 @@ async function getWeather(city) {
     const temp = Math.round(data.main.temp);
     const conditions = data.weather[0].description;
     const countryCode = data.sys.country; 
-    const weatherIcon = await `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${data.weather[0].icon}.svg`;
+    const weatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${data.weather[0].icon}.svg`;
 
-    console.log(location, temp, conditions);
-
-    let info = 
+    let markup = 
     `
     <article class="weather-results">
         <div class="location-title">
@@ -38,7 +42,7 @@ async function getWeather(city) {
     // reset results to empty
     document.querySelector('.weather-container').textContent = '';
     // insert html for desired location
-    document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', info);
+    document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', markup);
 }
 
 function getDate() {
@@ -47,7 +51,6 @@ function getDate() {
     let day = d.getDay();
     let date = d.getDate();
     let month = d.getMonth();
-    console.log(day, date, month);
 
     // Arrays for days and months
     const days = ["Monday", "Tuesday" ,"Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
