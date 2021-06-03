@@ -10,32 +10,35 @@ async function getWeather(city) {
     console.log(data);
 
     // API data
-    let location = data.name;
-    let temp = Math.round(data.main.temp);
-    let conditions = data.weather[0].description;
-    let weatherIcon = await `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    const location = data.name;
+    const temp = Math.round(data.main.temp);
+    const conditions = data.weather[0].description;
+    const countryCode = data.sys.country; 
+    const weatherIcon = await `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${data.weather[0].icon}.svg`;
 
     console.log(location, temp, conditions);
 
     let info = 
     `
-    <div class="location-title">
-        <h3>${location}</h3>
-        <p>${getDate()}</p>
-    </div>
-    <div class="location-temp">
-        <p>${temp}&#176;F</p>
-    </div>
-    <div class="location-conditions">
-        <img src=${weatherIcon}>
-        <p>${conditions.toUpperCase()}</p>
-    </div>
+    <article class="weather-results">
+        <div class="location-title">
+            <h3><span>${location}</span><sup>${countryCode}</sup></h3>
+            <p><em>${getDate()}</em></p>
+        </div>
+        <div class="location-temp">
+            ${temp}<sup>&#176;F</sup>
+        </div>
+        <div class="location-conditions">
+            <img src=${weatherIcon}>
+            <p>${conditions.toUpperCase()}</p>
+        </div>
+    </article>
     `
 
     // reset results to empty
-    document.querySelector('.weather-results').textContent = '';
+    document.querySelector('.weather-container').textContent = '';
     // insert html for desired location
-    document.querySelector('.weather-results').insertAdjacentHTML('afterbegin', info);
+    document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', info);
 }
 
 function getDate() {
@@ -46,18 +49,20 @@ function getDate() {
     let month = d.getMonth();
     console.log(day, date, month);
 
+    // Arrays for days and months
     const days = ["Monday", "Tuesday" ,"Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-    console.log(days[day - 1]);
-    console.log(months[month]);
 
     return `${days[day - 1]}, ${months[month]} ${date}`
 }
 
-document.querySelector('#location').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        let userLocation =  document.querySelector('#location');
-        getWeather(userLocation.value);
-    }
+// event lsitener on enter to run functions
+document.querySelector('.weather-input form').addEventListener('submit', (e) => {
+    // if (e.key === 'Enter') {
+    //     let userLocation =  document.querySelector('#location');
+    //     getWeather(userLocation.value);
+    // }
+    e.preventDefault();
+    let userLocation =  document.querySelector('#location');
+    getWeather(userLocation.value);
 })

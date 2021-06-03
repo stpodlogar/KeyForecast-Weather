@@ -8,11 +8,14 @@
     <link href="/css/weather.css" rel="stylesheet">
 </head>
 <body>
-    <div class="weather-container">
+    <div class="app-container">
         <header class="weather-input">
-            <input type="text" id="location" placeholder="Search Location..." />
+            <form>
+                <input type="text" id="location" placeholder="Search Location..." autocomplete="off"/>
+                <button type="submit">Search</button>
+            </form>
         </header>
-        <section class="weather-results"></section>
+        <section class="weather-container"></section>
     </div>
 
     <script src="/weather.js"></script>
