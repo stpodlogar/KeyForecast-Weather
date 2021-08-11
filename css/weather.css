@@ -138,6 +138,10 @@ body {
     margin: 10px 0;
 }
 
+.forecast-day h3 {
+    color: var(--darkblue);
+}
+
 .forecast-day .min-max-temp {
     background: var(--darkblue);
     color: #fff;
