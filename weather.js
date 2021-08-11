@@ -140,6 +140,7 @@ document.querySelector('.weather-input form').addEventListener('submit', (e) => 
     //     let userLocation =  document.querySelector('#location');
     //     getWeather(userLocation.value);
     // }
+    document.activeElement.blur();
     e.preventDefault();
     let userLocation =  document.querySelector('#location');
     getCoordinates(userLocation.value);
