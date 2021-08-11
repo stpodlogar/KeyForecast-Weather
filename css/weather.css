@@ -58,6 +58,7 @@ body {
 }
 
 .weather-results h2 {
+    font-weight: 400;
     margin-bottom: 15px;
 }
 
@@ -205,7 +206,8 @@ form button:hover {
 
 .location-temp {
     color: var(--text_dark);
-    font-size: 5rem;
+    font-weight: 200;
+    font-size: 6rem;
 }
 
 .location-temp sup {
