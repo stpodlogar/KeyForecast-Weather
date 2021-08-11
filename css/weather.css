@@ -5,13 +5,14 @@
 }
 
 :root {
-    --bg_main: #b0bec5;
+    --bg_main: #081B33;
     --bg_alt: #fff;
     --text_light: #fff;
     --text_med: #53627c;
     --text-dark: #1e2432;
     --blue: #2196f3;
     --darkblue: #1976d2;
+    --darkestblue: #767D92;
     --error: #ff1e42;
 }
 
@@ -33,7 +34,7 @@ body {
 .app-container {
     display: flex;
     justify-content: center;
-    max-width: 900px;
+    max-width: 960px;
     margin: 50px auto;
     flex-flow: row wrap;
 }
@@ -52,7 +53,7 @@ body {
     position: relative;
     background: var(--bg_alt);
     border-radius: 20px;
-    padding: 40px 20px;
+    padding: 1.5rem 2rem;
     margin: 0 20px;
 }
 
@@ -60,22 +61,58 @@ body {
     margin-bottom: 15px;
 }
 
-/* .weather-results::after {
+.weather-results::after {
     content: '';
-    width: 95%;
-    height: 50px;
+    width: 98%;
+    height: 035px;
     position: absolute;
-    left: 2.5%;
+    left: 1%;
     z-index: -1;
     opacity: 0.3;
     border-radius: 20px;
-    background: var(--text_med);
-} */
+    background: var(--darkestblue);
+}
 
 .weather-data {
+    width: 80%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-flow: row wrap;
+}
+
+.weather-data > section {
+    margin-bottom: 2rem;
+}
+
+.feels-like {
+    display: flex;
+    flex-direction: column;
+}
+
+.feels-like h3 {
+    margin-bottom: 1.4rem;
+    color: var(--darkblue);
+}
+
+.feels-like-attribute {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.feels-like-attribute div {
+    width: 8rem;
+    color: var(--text_med);
+}
+
+.feels-like-attribute div i {
+    margin-right: 1rem;
+    width: 1rem;
+}
+
+.feels-like-attribute .data-value {
+    font-weight: 700;
+    color: var(--darkblue);
 }
 
 .week-forecast {
@@ -98,6 +135,15 @@ body {
 
 .forecast-day img {
     margin: 10px 0;
+}
+
+.forecast-day .min-max-temp {
+    background: var(--darkblue);
+    color: #fff;
+    padding: 0.2em 0.6em;
+    border-radius: 50px;
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 #location {
@@ -125,14 +171,14 @@ form button {
     border: none;
     width: 20%;
     border-radius: 0 30px 30px 0;
-    background: var(--blue);
+    background: var(--darkblue);
     color: var(--text_light);
+    transition: background ease-in-out 0.2s;
 }
 
 form button:hover {
     cursor: pointer;
-    background: var(--darkblue);
-    transition: background ease-in-out 0.2s;
+    background: var(--blue);
 }
 
 .location-title h3 {
@@ -142,7 +188,7 @@ form button:hover {
 }
 
 .location-title h3 sup{
-    background: var(--blue);
+    background: var(--darkblue);
     color: var(--text_light);
     font-size: 0.3em;
     padding: 0.2em 0.6em;
@@ -179,3 +225,7 @@ form button:hover {
     margin-top: 5px;
     padding-left: 25px;
 }
+
+/* .data-value {
+    margin-left: 20px;
+} */

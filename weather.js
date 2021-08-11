@@ -21,17 +21,16 @@ async function getCoordinates(city) {
     const location = data.name;
     const countryCode = data.sys.country; 
 
-    getWeather(lat, lon, location);
+    getWeather(lat, lon, location, countryCode);
 }
 
-async function getWeather(lat, lon, location) {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&units=imperial&appid=${API_KEY}`)
-    console.log(response.status);
+async function getWeather(lat, lon, location, countryCode) {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&units=imperial&appid=${API_KEY}`);
 
     const data = await response.json();
-    console.log(data);
 
     console.log(location);
+    console.log(countryCode);
 
     // API data
     const temp = Math.round(data.current.temp);
@@ -52,23 +51,18 @@ async function getWeather(lat, lon, location) {
             <h3>${getDayOfWeek(element.dt)}</h3>
             <img src="${dailyWeatherIcon}">
             <p>${element.weather[0].main}</p>
-            <p>${Math.round(element.temp.max)}<sup>&#176;</sup> / ${Math.round(element.temp.min)}<sup>&#176;</sup><p>
+            <p class="min-max-temp">${Math.round(element.temp.max)}<sup>&#176;</sup> / ${Math.round(element.temp.min)}<sup>&#176;</sup><p>
         </div>`
-        console.log(element.temp.max, element.temp.min);
-        console.log(element.weather[0].main, element.weather[0].icon);
     });
 
     let markup = 
     `
     <article class="weather-results">
-        <div style="display: flex; justify-content: space-between">
-            <h2>Current Weather</h2>
-            <p>F or C</p>
-        </div>
+        <h2>Current Weather</h2>
         <article class="weather-data">
             <section>
                 <div class="location-title">
-                    <h3><span>${location}</span></h3>
+                    <h3><span>${location}</span><sup>${countryCode}</sup></h3>
                     <!-- <p><em>${getDate()}</em></p> -->
                 </div>
                 <div style="display: flex; align-items: center; justify-content: center">
@@ -81,16 +75,31 @@ async function getWeather(lat, lon, location) {
                  </div>
                 <p>${conditions.toUpperCase()}</p>
             </section>
-            <section>
+            <section class="feels-like">
                 <h3>Feels like ${feelsLike}<sup>&#176;</sup></h3>
-                <p>Humidity ${humidity}%</p>
-                <p>Wind ${wind}mph</p>
-                <p>Pressure ${pressure}hPa</p>
+                <div class="feels-like-attribute">
+                    <div>
+                        <i class="fas fa-tint"></i>Humidity
+                    </div>
+                    <span class="data-value">${humidity}%</span>
+                </div>
+                <div class="feels-like-attribute">
+                    <div>
+                        <i class="fas fa-wind"></i>Wind
+                    </div>
+                    <span class="data-value">${wind}mph</span>
+                </div>
+                <div class="feels-like-attribute">
+                    <div>
+                        <i class="fas fa-compress-alt"></i>Pressure
+                    </div>
+                    <span class="data-value">${pressure}hPa</span>
+                </div>
             </section>
         </article>
     </article>
-    <article class="weather-results" style="margin-top: 20px">
-        <h2>Extended Forecast</h2>
+    <article class="weather-results" style="margin-top: 40px">
+        <h2>7-Day Forecast</h2>
         <section class="week-forecast">
             ${dailyWeather}
         </section>
@@ -105,7 +114,6 @@ async function getWeather(lat, lon, location) {
 
 function getDayOfWeek(dt) {
     const d = new Date(dt * 1000);
-    console.log(d);
     let n = d.getDay();
 
     const daysAbbrev = ["Sun", "Mon", "Tue" ,"Wed", "Thu", "Fri", "Sat"];
