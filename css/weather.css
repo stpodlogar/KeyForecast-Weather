@@ -136,6 +136,7 @@ body {
 
 .forecast-day img {
     margin: 10px 0;
+    height: 100%;
 }
 
 .forecast-day h3 {
