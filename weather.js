@@ -37,8 +37,23 @@ async function getWeather(lat, lon, location) {
     const temp = Math.round(data.current.temp);
     const conditions = data.current.weather[0].description;
     const weatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${data.current.weather[0].icon}.svg`;
+    const humidity = data.current.humidity;
+    const feelsLike = Math.round(data.current.feels_like);
+    const pressure = data.current.pressure;
+    const wind = Math.round(data.current.wind_speed);
 
-    data.daily.forEach(element => {
+    let dailyWeather = '';
+
+    data.daily.forEach((element, index) => {
+        if (index === 0) return;
+        const dailyWeatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${element.weather[0].icon}.svg`;
+        dailyWeather += 
+        `<div class="forecast-day">
+            <h3>${getDayOfWeek(element.dt)}</h3>
+            <img src="${dailyWeatherIcon}">
+            <p>${element.weather[0].main}</p>
+            <p>${Math.round(element.temp.max)}<sup>&#176;</sup> / ${Math.round(element.temp.min)}<sup>&#176;</sup><p>
+        </div>`
         console.log(element.temp.max, element.temp.min);
         console.log(element.weather[0].main, element.weather[0].icon);
     });
@@ -54,7 +69,7 @@ async function getWeather(lat, lon, location) {
             <section>
                 <div class="location-title">
                     <h3><span>${location}</span></h3>
-                    <p><em>${getDate()}</em></p>
+                    <!-- <p><em>${getDate()}</em></p> -->
                 </div>
                 <div style="display: flex; align-items: center; justify-content: center">
                     <div class="location-conditions" style="display: inline">
@@ -67,12 +82,18 @@ async function getWeather(lat, lon, location) {
                 <p>${conditions.toUpperCase()}</p>
             </section>
             <section>
-
+                <h3>Feels like ${feelsLike}<sup>&#176;</sup></h3>
+                <p>Humidity ${humidity}%</p>
+                <p>Wind ${wind}mph</p>
+                <p>Pressure ${pressure}hPa</p>
             </section>
         </article>
     </article>
     <article class="weather-results" style="margin-top: 20px">
-        <h2>Future weather</h2>
+        <h2>Extended Forecast</h2>
+        <section class="week-forecast">
+            ${dailyWeather}
+        </section>
     </article>
     `
 
@@ -80,6 +101,15 @@ async function getWeather(lat, lon, location) {
     document.querySelector('.weather-container').textContent = '';
     // insert html for desired location
     document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', markup);
+}
+
+function getDayOfWeek(dt) {
+    const d = new Date(dt * 1000);
+    console.log(d);
+    let n = d.getDay();
+
+    const daysAbbrev = ["Sun", "Mon", "Tue" ,"Wed", "Thu", "Fri", "Sat"];
+    return `${daysAbbrev[n]}`;
 }
 
 function getDate() {
