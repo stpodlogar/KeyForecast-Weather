@@ -78,7 +78,7 @@ async function getWeather(lat, lon, location) {
                     <div class="location-temp" style="display: inline">
                         ${temp}<sup>&#176;</sup>
                     </div>
-                </div>
+                 </div>
                 <p>${conditions.toUpperCase()}</p>
             </section>
             <section>

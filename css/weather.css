@@ -24,7 +24,7 @@ body {
 .app-container {
     display: flex;
     justify-content: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 50px auto;
     flex-flow: row wrap;
 }
@@ -35,20 +35,23 @@ body {
 }
 
 .weather-container {
-    width: 500px;
+    width: 100%;
     margin-top: 50px;
 }
 
 .weather-results {
     position: relative;
-    text-align: center;
     background: var(--bg_alt);
     border-radius: 20px;
     padding: 40px 20px;
     margin: 0 20px;
 }
 
-.weather-results::after {
+.weather-results h2 {
+    margin-bottom: 15px;
+}
+
+/* .weather-results::after {
     content: '';
     width: 95%;
     height: 50px;
@@ -58,6 +61,34 @@ body {
     opacity: 0.3;
     border-radius: 20px;
     background: var(--text_med);
+} */
+
+.weather-data {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+}
+
+.week-forecast {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 10px 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+.forecast-day {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 10px;
+    flex: 0 0 auto;
+}
+
+.forecast-day img {
+    margin: 10px 0;
 }
 
 #location {
