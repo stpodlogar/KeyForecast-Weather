@@ -40,6 +40,10 @@ async function getWeather(lat, lon, location, countryCode) {
     const feelsLike = Math.round(data.current.feels_like);
     const pressure = data.current.pressure;
     const wind = Math.round(data.current.wind_speed);
+    const currentHi = Math.round(data.daily[0].temp.max);
+    const currentLo = Math.round(data.daily[0].temp.min);
+
+    console.log(currentHi, currentLo);
 
     let dailyWeather = '';
 
@@ -63,7 +67,6 @@ async function getWeather(lat, lon, location, countryCode) {
             <section>
                 <div class="location-title">
                     <h3><span>${location}</span><sup>${countryCode}</sup></h3>
-                    <!-- <p><em>${getDate()}</em></p> -->
                 </div>
                 <div style="display: flex; align-items: center; justify-content: center">
                     <div class="location-conditions" style="display: inline">
@@ -77,6 +80,10 @@ async function getWeather(lat, lon, location, countryCode) {
             </section>
             <section class="feels-like">
                 <h3>Feels like ${feelsLike}<sup>&#176;</sup></h3>
+                <div class="hi-lo">
+                    <div><i class="fas fa-arrow-up"></i>${currentHi}<sup>&#176;</sup></div>
+                    <div><i class="fas fa-arrow-down"></i>${currentLo}<sup>&#176;</sup></div>
+                </div>
                 <div class="feels-like-attribute">
                     <div>
                         <i class="fas fa-tint"></i>Humidity
@@ -120,19 +127,19 @@ function getDayOfWeek(dt) {
     return `${daysAbbrev[n]}`;
 }
 
-function getDate() {
-    // Date data
-    const d = new Date();
-    let day = d.getDay();
-    let date = d.getDate();
-    let month = d.getMonth();
+// function getDate() {
+//     // Date data
+//     const d = new Date();
+//     let day = d.getDay();
+//     let date = d.getDate();
+//     let month = d.getMonth();
 
-    // Arrays for days and months
-    const days = ["Monday", "Tuesday" ,"Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+//     // Arrays for days and months
+//     const days = ["Monday", "Tuesday" ,"Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+//     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-    return `${days[day - 1]}, ${months[month]} ${date}`
-}
+//     return `${days[day - 1]}, ${months[month]} ${date}`
+// }
 
 // event lsitener on enter to run functions
 document.querySelector('.weather-input form').addEventListener('submit', (e) => {

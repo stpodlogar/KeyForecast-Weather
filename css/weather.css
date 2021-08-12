@@ -11,14 +11,18 @@
     --text_med: #53627c;
     --text-dark: #1e2432;
     --blue: #2196f3;
-    --darkblue: #1976d2;
-    --darkestblue: #767D92;
+    --darkblue: #4e54c8;
+    --darkestblue: #000428;
     --error: #ff1e42;
+}
+
+html {
+    background-image: linear-gradient(0, #4e54c8, #8f94fb);
+    min-height: 100vh;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: var(--bg_main);
     color: var(--text_dark);
 }
 
@@ -69,7 +73,7 @@ body {
     position: absolute;
     left: 1%;
     z-index: -1;
-    opacity: 0.3;
+    opacity: 0.4;
     border-radius: 20px;
     background: var(--darkestblue);
 }
@@ -91,14 +95,13 @@ body {
 }
 
 .feels-like h3 {
-    margin-bottom: 1.4rem;
     color: var(--darkblue);
 }
 
 .feels-like-attribute {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .feels-like-attribute div {
@@ -114,6 +117,28 @@ body {
 .feels-like-attribute .data-value {
     font-weight: 700;
     color: var(--darkblue);
+}
+
+.hi-lo {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0.8rem 0 1.5rem 0;
+}
+
+.hi-lo div {
+    display: inline-block;
+    font-weight: 700;
+    color: var(--darkblue);
+    font-size: 1.25rem;
+}
+
+.hi-lo > div {
+    margin-right: 2rem;
+}
+
+.hi-lo div .fas {
+    color: var(--text_med);
+    margin-right: 1rem;
 }
 
 .week-forecast {
@@ -184,13 +209,14 @@ form button {
 
 form button:hover {
     cursor: pointer;
-    background: var(--blue);
+    background: var(--darkblue);
+    opacity: 0.9;
 }
 
 .location-title h3 {
     font-size: 2.5rem;
     color: var(--text_med);
-    font-weight: 200;
+    font-weight: 400;
 }
 
 .location-title h3 sup{
