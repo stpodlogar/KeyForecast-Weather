@@ -156,8 +156,8 @@ body {
     font-size: 1.25rem;
 }
 
-.hourly-temp :first-child {
-    width: 5rem;
+.hourly-temp div:first-child {
+    width: 4rem;
 }
 
 .hourly-weather-row img {
