@@ -25,12 +25,9 @@ async function getCoordinates(city) {
 }
 
 async function getWeather(lat, lon, location, countryCode) {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&units=imperial&appid=${API_KEY}`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${API_KEY}`);
 
     const data = await response.json();
-
-    console.log(location);
-    console.log(countryCode);
 
     // API data
     const temp = Math.round(data.current.temp);
@@ -42,8 +39,6 @@ async function getWeather(lat, lon, location, countryCode) {
     const wind = Math.round(data.current.wind_speed);
     const currentHi = Math.round(data.daily[0].temp.max);
     const currentLo = Math.round(data.daily[0].temp.min);
-
-    console.log(currentHi, currentLo);
 
     let dailyWeather = '';
 
@@ -59,53 +54,88 @@ async function getWeather(lat, lon, location, countryCode) {
         </div>`
     });
 
+    // Get hourly weather and display
+    let hourlyWeather = '';
+
+    const hourlyWeatherData = data.hourly.slice(1, 23);
+
+    for (const element of hourlyWeatherData) {
+        const hourlyWeatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${element.weather[0].icon}.svg`;
+        
+        hourlyWeather +=
+        `
+        <div class="hourly-weather-row">
+            <div class="hourly-temp">
+                <div>${getHour(element.dt)}</div>
+                <div>${Math.round(element.temp)}<sup>&#176;</sup></div>
+                <div class="hourly-description">
+                    <img src="${hourlyWeatherIcon}">
+                    <p>${element.weather[0].description}</p>
+                </div>
+            </div>
+
+            <div class="hourly-pop">
+                <i class="fas fa-tint"></i>${Math.round(element.pop * 100)}%
+            </div>
+        </div>
+        <hr>
+        `
+    }
+
+    // Markup to be rendered on screen
     let markup = 
     `
     <article class="weather-results">
-        <h2>Current Weather</h2>
-        <article class="weather-data">
-            <section>
-                <div class="location-title">
-                    <h3><span>${location}</span><sup>${countryCode}</sup></h3>
-                </div>
-                <div style="display: flex; align-items: center; justify-content: center">
-                    <div class="location-conditions" style="display: inline">
-                        <img src=${weatherIcon}>
+        <section style="padding: 0 2rem">
+            <h2>Current Weather</h2>
+            <article class="weather-data">
+                <section>
+                    <div class="location-title">
+                        <h3><span>${location}</span><sup>${countryCode}</sup></h3>
                     </div>
-                    <div class="location-temp" style="display: inline">
-                        ${temp}<sup>&#176;</sup>
+                    <div style="display: flex; align-items: center; justify-content: center">
+                        <div class="location-conditions" style="display: inline">
+                            <img src=${weatherIcon}>
+                        </div>
+                        <div class="location-temp" style="display: inline">
+                            ${temp}<sup>&#176;</sup>
+                        </div>
                     </div>
-                 </div>
-                <p>${conditions.toUpperCase()}</p>
-            </section>
-            <section class="feels-like">
-                <h3>Feels like ${feelsLike}<sup>&#176;</sup></h3>
-                <div class="hi-lo">
-                    <div><i class="fas fa-arrow-up"></i>${currentHi}<sup>&#176;</sup></div>
-                    <div><i class="fas fa-arrow-down"></i>${currentLo}<sup>&#176;</sup></div>
-                </div>
-                <div class="feels-like-attribute">
-                    <div>
-                        <i class="fas fa-tint"></i>Humidity
+                    <p>${conditions.toUpperCase()}</p>
+                </section>
+                <section class="feels-like">
+                    <h3>Feels like ${feelsLike}<sup>&#176;</sup></h3>
+                    <div class="hi-lo">
+                        <div><i class="fas fa-arrow-up"></i>${currentHi}<sup>&#176;</sup></div>
+                        <div><i class="fas fa-arrow-down"></i>${currentLo}<sup>&#176;</sup></div>
                     </div>
-                    <span class="data-value">${humidity}%</span>
-                </div>
-                <div class="feels-like-attribute">
-                    <div>
-                        <i class="fas fa-wind"></i>Wind
+                    <div class="feels-like-attribute">
+                        <div>
+                            <i class="fas fa-thermometer-half"></i>Humidity
+                        </div>
+                        <span class="data-value">${humidity}%</span>
                     </div>
-                    <span class="data-value">${wind}mph</span>
-                </div>
-                <div class="feels-like-attribute">
-                    <div>
-                        <i class="fas fa-compress-alt"></i>Pressure
+                    <div class="feels-like-attribute">
+                        <div>
+                            <i class="fas fa-wind"></i>Wind
+                        </div>
+                        <span class="data-value">${wind}mph</span>
                     </div>
-                    <span class="data-value">${pressure}hPa</span>
-                </div>
-            </section>
-        </article>
+                    <div class="feels-like-attribute">
+                        <div>
+                            <i class="fas fa-compress-alt"></i>Pressure
+                        </div>
+                        <span class="data-value">${pressure}hPa</span>
+                    </div>
+                </section>
+            </article>
+        </section>
     </article>
-    <article class="weather-results" style="margin-top: 40px">
+    <article class="weather-results hourly-forecast" style="margin-top: 30px">
+        <h2 style="padding-left: 2rem">Hourly Forecast</h2>
+        ${hourlyWeather}
+    </article>
+    <article class="weather-results" style="margin-top: 30px; padding: 1.5rem 2rem">
         <h2>7-Day Forecast</h2>
         <section class="week-forecast">
             ${dailyWeather}
@@ -127,6 +157,26 @@ function getDayOfWeek(dt) {
     return `${daysAbbrev[n]}`;
 }
 
+function getHour(dt) {
+    const d = new Date(dt * 1000);
+    let hours = d.getHours();
+    let timeValue;
+
+    if (hours > 0 && hours <= 12) {
+        timeValue = hours;
+    }
+    else if (hours > 12) {
+        timeValue = hours - 12;
+    }
+    else if (hours === 0) {
+        timeValue = 12;
+    }
+
+    timeValue += ":00";
+    timeValue += (hours >= 12) ? " pm" : " am";
+    return timeValue;
+}
+
 // function getDate() {
 //     // Date data
 //     const d = new Date();
@@ -143,10 +193,7 @@ function getDayOfWeek(dt) {
 
 // event lsitener on enter to run functions
 document.querySelector('.weather-input form').addEventListener('submit', (e) => {
-    // if (e.key === 'Enter') {
-    //     let userLocation =  document.querySelector('#location');
-    //     getWeather(userLocation.value);
-    // }
+    // remove keyboard on submit on mobile
     document.activeElement.blur();
     e.preventDefault();
     let userLocation =  document.querySelector('#location');
