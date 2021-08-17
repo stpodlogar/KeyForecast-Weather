@@ -5,7 +5,7 @@
 }
 
 :root {
-    --bg_main: #081B33;
+    --bg_main: #E0E5EC;
     --bg_alt: #fff;
     --text_light: #fff;
     --text_med: #53627c;
@@ -17,8 +17,9 @@
 }
 
 html {
-    background-image: linear-gradient(0, #4e54c8, #8f94fb);
+    /* background-image: linear-gradient(0, #4e54c8, #8f94fb); */
     background-attachment: fixed;
+    background-color: var(--bg_main);
 }
 
 body {
@@ -29,7 +30,7 @@ body {
 .app-container {
     display: flex;
     justify-content: center;
-    max-width: 960px;
+    max-width: 768px;
     margin: 50px auto;
     flex-flow: row wrap;
 }
@@ -46,10 +47,13 @@ body {
 
 .weather-results {
     position: relative;
-    background: var(--bg_alt);
+    background: var(--bg_main);
     border-radius: 20px;
     padding: 1.5rem 1rem;
     margin: 0 0.75rem;
+    box-shadow: 
+        9px 9px 16px rgb(163,177,198,0.6), 
+        -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
 .weather-results h2 {
@@ -57,7 +61,7 @@ body {
     margin-bottom: 15px;
 }
 
-.weather-results::after {
+/* .weather-results::after {
     content: '';
     width: 98%;
     height: 035px;
@@ -67,7 +71,7 @@ body {
     opacity: 0.4;
     border-radius: 20px;
     background: var(--darkestblue);
-}
+} */
 
 .weather-data {
     width: 80%;
@@ -218,18 +222,22 @@ body {
 }
 
 #location {
-    width: 80%;
-    border-radius: 30px 0 0 30px;
+    width: 85%;
+    border-radius: 30px;
     height: 40px;
     padding: 5px 25px;
     border: none;
     color: var(--text_dark);
+    background-color: var(--bg_main);
+    box-shadow: 
+        9px 9px 16px rgb(163,177,198,0.6), 
+        -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
 #location:focus {
     outline: none;
     transition: ease-in-out 0.2s;
-    background-color: var(--bg_alt);
+    background-color: var(--bg_main);
 }
 
 form {
@@ -239,18 +247,21 @@ form {
 form button {
     font-weight: bold;
     height: 40px;
+    width: 40px;
     border: none;
-    width: 20%;
-    border-radius: 0 30px 30px 0;
-    background: var(--darkblue);
-    color: var(--text_light);
+    border-radius: 30px;
+    background: var(--bg_main);
+    color: var(--darkblue);
+    margin-left: auto;
     transition: background ease-in-out 0.2s;
+    box-shadow: 
+        9px 9px 16px rgb(163,177,198,0.6), 
+        -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
 form button:hover {
     cursor: pointer;
-    background: var(--darkblue);
-    opacity: 0.9;
+    background: rgb(0 0 0 / 5%);
 }
 
 .location-title h3 {
