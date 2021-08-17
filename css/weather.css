@@ -48,7 +48,7 @@ body {
     position: relative;
     background: var(--bg_alt);
     border-radius: 20px;
-    padding: 1.5rem 0;
+    padding: 1.5rem 1rem;
     margin: 0 0.75rem;
 }
 
@@ -138,8 +138,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 4rem;
-    padding: 1rem;
+    padding: 0.25rem 1rem;
     font-size: 14px;
 }
 
@@ -323,6 +322,6 @@ form button:hover {
     }
 
     .hourly-weather-row .hourly-temp {
-        width: 15rem;
+        width: 13rem;
     }
 }

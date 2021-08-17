@@ -86,7 +86,7 @@ async function getWeather(lat, lon, location, countryCode) {
     let markup = 
     `
     <article class="weather-results">
-        <section style="padding: 0 2rem">
+        <section style="padding: 0 1rem">
             <h2>Current Weather</h2>
             <article class="weather-data">
                 <section>
@@ -132,7 +132,7 @@ async function getWeather(lat, lon, location, countryCode) {
         </section>
     </article>
     <article class="weather-results hourly-forecast" style="margin-top: 30px">
-        <h2 style="padding-left: 2rem">Hourly Forecast</h2>
+        <h2 style="padding-left: 1rem">Hourly Forecast</h2>
         ${hourlyWeather}
     </article>
     <article class="weather-results" style="margin-top: 30px; padding: 1.5rem 2rem">
