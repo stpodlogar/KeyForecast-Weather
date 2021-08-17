@@ -70,7 +70,7 @@ async function getWeather(lat, lon, location, countryCode) {
                 <div>${Math.round(element.temp)}<sup>&#176;</sup></div>
                 <div class="hourly-description">
                     <img src="${hourlyWeatherIcon}">
-                    <p>${element.weather[0].description}</p>
+                    <p>${capitalizeFirst(element.weather[0].description)}</p>
                 </div>
             </div>
 
@@ -175,6 +175,14 @@ function getHour(dt) {
     timeValue += ":00";
     timeValue += (hours >= 12) ? " pm" : " am";
     return timeValue;
+}
+
+function capitalizeFirst(string) {
+    const words = string.split(" ");
+
+     return words.map((word) => {
+        return word[0].toUpperCase() + word.substring(1);
+    }).join(" ");
 }
 
 // function getDate() {
