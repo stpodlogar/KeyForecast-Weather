@@ -43,6 +43,19 @@ body {
 .weather-container {
     width: 100%;
     margin-top: 25px;
+    place-items: center;
+}
+
+.instructions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.instructions .search-image {
+    width: 50%;
+    margin: 3rem 0;
 }
 
 .weather-results {
@@ -52,7 +65,7 @@ body {
     padding: 1.5rem 1rem;
     margin: 0 0.75rem;
     box-shadow: 
-        9px 9px 16px rgb(163,177,198,0.6), 
+        9px 9px 16px rgba(163,177,198,0.6), 
         -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
@@ -182,7 +195,7 @@ body {
 }
 
 .hourly-pop i {
-    color: var(--text_med);
+    color: var(--darkblue);
 }
 
 .week-forecast {
@@ -230,7 +243,7 @@ body {
     color: var(--text_dark);
     background-color: var(--bg_main);
     box-shadow: 
-        9px 9px 16px rgb(163,177,198,0.6), 
+        9px 9px 16px rgba(163,177,198,0.6), 
         -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
@@ -255,7 +268,7 @@ form button {
     margin-left: auto;
     transition: background ease-in-out 0.2s;
     box-shadow: 
-        9px 9px 16px rgb(163,177,198,0.6), 
+        9px 9px 16px rgba(163,177,198,0.6), 
         -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
