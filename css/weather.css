@@ -244,11 +244,11 @@ body {
     color: var(--text_dark);
     background-color: var(--bg_main);
     border-bottom: 2px solid var(--text_light);
+    transition: ease-in-out 0.2s;
 }
 
 #location:focus {
     outline: none;
-    transition: ease-in-out 0.2s;
     border-bottom: 2px solid var(--darkblue);
 }
 
