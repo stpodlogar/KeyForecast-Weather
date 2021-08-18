@@ -238,18 +238,18 @@ body {
 
 #location {
     width: 85%;
-    border-radius: 30px;
     height: 40px;
     padding: 5px 25px;
     border: none;
     color: var(--text_dark);
-    background-color: var(--bg_alt);
+    background-color: var(--bg_main);
+    border-bottom: 2px solid var(--text_light);
 }
 
 #location:focus {
     outline: none;
     transition: ease-in-out 0.2s;
-    background-color: var(--bg_alt);
+    border-bottom: 2px solid var(--darkblue);
 }
 
 form {
