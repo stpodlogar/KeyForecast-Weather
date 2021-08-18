@@ -243,16 +243,13 @@ body {
     padding: 5px 25px;
     border: none;
     color: var(--text_dark);
-    background-color: var(--bg_main);
-    box-shadow: 
-        9px 9px 16px rgba(163,177,198,0.6), 
-        -9px -9px 16px rgba(255,255,255, 0.5);
+    background-color: var(--bg_alt);
 }
 
 #location:focus {
     outline: none;
     transition: ease-in-out 0.2s;
-    background-color: var(--bg_main);
+    background-color: var(--bg_alt);
 }
 
 form {
