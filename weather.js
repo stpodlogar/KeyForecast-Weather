@@ -170,7 +170,6 @@ async function getWeather(lat, lon, location, countryCode) {
     // Setup event listener to expand or collapse hourly weather
     // Grab all the trigger elements on the page
     const triggers = Array.from(document.querySelectorAll('[data-toggle="collapse"]'));
-    console.log(triggers);
 
     // Listen for click events, but only on our triggers
     window.addEventListener('click', (event) => {
