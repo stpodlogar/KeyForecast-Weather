@@ -181,6 +181,8 @@ button[data-toggle="collapse"] {
     background-color: var(--darkblue);
     color: var(--text_light);
     border: none;
+    font-size: 1em;
+    line-height: 1em;
 }
 
 button[data-toggle="collapse"]:hover {
