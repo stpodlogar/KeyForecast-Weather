@@ -129,13 +129,17 @@ async function getWeather(lat, lon, location, countryCode) {
             </article>
         </section>
     </article>
-    <article class="weather-results hourly-forecast" style="margin-top: 30px">
+    <article class="weather-results hourly-forecast" style="margin-top: 30px; padding-bottom: 10px">
         <h2 style="padding-left: 1rem">Hourly Forecast</h2>
         <div class="collapse">
             ${hourlyWeather}
         </div>
+        <div class="collapse-button">
+            <button data-toggle="collapse" data-target=".collapse" data-text="Collapse">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
     </article>
-    <button data-toggle="collapse" data-target=".collapse" data-text="Collapse">See more</button>
     <article class="weather-results" style="margin-top: 30px; padding: 1.5rem 2rem">
         <h2>7-Day Forecast</h2>
         <section class="week-forecast">
@@ -149,6 +153,20 @@ async function getWeather(lat, lon, location, countryCode) {
     // insert html for desired location
     document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', markup);
 
+    // Rotate chevron icon on click
+    let open = false;
+    const collapseButton = document.querySelector('button[data-toggle="collapse"]');
+    const arrow = document.querySelector('button[data-toggle="collapse"] > i');
+
+    collapseButton.addEventListener('click', function() {
+        if (open) {
+            arrow.className = 'fas fa-chevron-down'
+        } else {
+            arrow.className = 'fas fa-chevron-down open'
+        }
+        open = !open;
+    })
+
     // Setup event listener to expand or collapse hourly weather
     // Grab all the trigger elements on the page
     const triggers = Array.from(document.querySelectorAll('[data-toggle="collapse"]'));
@@ -158,8 +176,8 @@ async function getWeather(lat, lon, location, countryCode) {
     window.addEventListener('click', (event) => {
         const elm = event.target;
         if (triggers.includes(elm)) {
-        const selector = elm.getAttribute('data-target');
-        collapse(selector, 'toggle');
+            const selector = elm.getAttribute('data-target');
+            collapse(selector, 'toggle');
         }
     });
 
@@ -171,7 +189,6 @@ async function getWeather(lat, lon, location, countryCode) {
 
     const collapse = (selector, cmd) => {
         const targets = Array.from(document.querySelectorAll(selector));
-        console.log(targets);
         targets.forEach(target => {
             target.classList[fnmap[cmd]]('show');
         })

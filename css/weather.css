@@ -163,6 +163,44 @@ body {
     transition: max-height 0.5s ease-in-out;
 }
 
+.collapse-button {
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    position: relative;
+    height: 1em;
+}
+
+button[data-toggle="collapse"] {
+    position: absolute;
+    padding: 10px 20px;
+    border-radius: 100px;
+    z-index: 100;
+    bottom: -2em;
+    outline: none;
+    background-color: var(--darkblue);
+    color: var(--text_light);
+    border: none;
+}
+
+button[data-toggle="collapse"]:hover {
+    cursor: pointer;
+}
+
+button[data-toggle="collapse"] > i {
+    pointer-events: none;
+}
+
+.fa-chevron-down {
+    transform: rotate(0deg);
+    transition: transform 0.3s linear;
+}
+
+.fa-chevron-down.open {
+    transform: rotate(180deg);
+    transition: transform 0.3s linear;
+}
+
 .hourly-weather-row {
     display: flex;
     width: 100%;
