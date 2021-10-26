@@ -4,7 +4,6 @@ const API_KEY = '8d806538f88014f91bc539358457b4a8';
 
 async function getCoordinates(city) {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
-    console.log(response.status);
     
     if (response.status === 404) {
         document.querySelector('.error').textContent = "Please enter a valid city";
@@ -13,7 +12,6 @@ async function getCoordinates(city) {
         document.querySelector('.error').textContent = "";
     }
     const data = await response.json();
-    console.log(data);
 
     // API data
     const lat = data.coord.lat;
@@ -133,8 +131,11 @@ async function getWeather(lat, lon, location, countryCode) {
     </article>
     <article class="weather-results hourly-forecast" style="margin-top: 30px">
         <h2 style="padding-left: 1rem">Hourly Forecast</h2>
-        ${hourlyWeather}
+        <div class="collapse">
+            ${hourlyWeather}
+        </div>
     </article>
+    <button data-toggle="collapse" data-target=".collapse" data-text="Collapse">See more</button>
     <article class="weather-results" style="margin-top: 30px; padding: 1.5rem 2rem">
         <h2>7-Day Forecast</h2>
         <section class="week-forecast">
@@ -147,6 +148,34 @@ async function getWeather(lat, lon, location, countryCode) {
     document.querySelector('.weather-container').textContent = '';
     // insert html for desired location
     document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', markup);
+
+    // Setup event listener to expand or collapse hourly weather
+    // Grab all the trigger elements on the page
+    const triggers = Array.from(document.querySelectorAll('[data-toggle="collapse"]'));
+    console.log(triggers);
+
+    // Listen for click events, but only on our triggers
+    window.addEventListener('click', (event) => {
+        const elm = event.target;
+        if (triggers.includes(elm)) {
+        const selector = elm.getAttribute('data-target');
+        collapse(selector, 'toggle');
+        }
+    });
+
+    const fnmap = {
+        'toggle': 'toggle',
+        'show': 'add',
+        'hide': 'remove'
+    }
+
+    const collapse = (selector, cmd) => {
+        const targets = Array.from(document.querySelectorAll(selector));
+        console.log(targets);
+        targets.forEach(target => {
+            target.classList[fnmap[cmd]]('show');
+        })
+    }
 }
 
 function getDayOfWeek(dt) {
