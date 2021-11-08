@@ -38,48 +38,6 @@ async function getWeather(lat, lon, location, countryCode) {
     const currentHi = Math.round(data.daily[0].temp.max);
     const currentLo = Math.round(data.daily[0].temp.min);
 
-    let dailyWeather = '';
-
-    data.daily.forEach((element, index) => {
-        if (index === 0) return;
-        const dailyWeatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${element.weather[0].icon}.svg`;
-        dailyWeather += 
-        `<div class="forecast-day">
-            <h3>${getDayOfWeek(element.dt)}</h3>
-            <img src="${dailyWeatherIcon}">
-            <p>${element.weather[0].main}</p>
-            <p class="min-max-temp">${Math.round(element.temp.max)}<sup>&#176;</sup> / ${Math.round(element.temp.min)}<sup>&#176;</sup><p>
-        </div>`
-    });
-
-    // Get hourly weather and display
-    let hourlyWeather = '';
-
-    const hourlyWeatherData = data.hourly.slice(1, 23);
-
-    for (const element of hourlyWeatherData) {
-        const hourlyWeatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${element.weather[0].icon}.svg`;
-        
-        hourlyWeather +=
-        `
-        <div class="hourly-weather-row">
-            <div class="hourly-temp">
-                <div>${getHour(element.dt)}</div>
-                <div>${Math.round(element.temp)}<sup>&#176;</sup></div>
-                <div class="hourly-description">
-                    <img src="${hourlyWeatherIcon}">
-                    <p>${capitalizeFirst(element.weather[0].description)}</p>
-                </div>
-            </div>
-
-            <div class="hourly-pop">
-                <i class="fas fa-tint"></i>${Math.round(element.pop * 100)}%
-            </div>
-        </div>
-        <hr>
-        `
-    }
-
     // Markup to be rendered on screen
     let markup = 
     `
@@ -132,7 +90,7 @@ async function getWeather(lat, lon, location, countryCode) {
     <article class="weather-results hourly-forecast" style="margin-top: 30px; padding-bottom: 10px">
         <h2 style="padding-left: 1rem">Hourly Forecast</h2>
         <div class="collapse">
-            ${hourlyWeather}
+            ${generateHourly(data)}
         </div>
         <div class="collapse-button">
             <button data-toggle="collapse" data-target=".collapse" data-text="Collapse">
@@ -143,7 +101,7 @@ async function getWeather(lat, lon, location, countryCode) {
     <article class="weather-results" style="margin-top: 30px; padding: 1.5rem 2rem">
         <h2>7-Day Forecast</h2>
         <section class="week-forecast">
-            ${dailyWeather}
+            ${generateDaily(data)}
         </section>
     </article>
     `
@@ -192,6 +150,56 @@ async function getWeather(lat, lon, location, countryCode) {
             target.classList[fnmap[cmd]]('show');
         })
     }
+}
+
+// Generate markup for daily weather data
+function generateDaily(data) {
+    let dailyWeather = '';
+
+    // loop through each element and append HTML to dailyWeather
+    data.daily.forEach((element, index) => {
+        if (index === 0) return;
+        const dailyWeatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${element.weather[0].icon}.svg`;
+        dailyWeather += 
+        `<div class="forecast-day">
+            <h3>${getDayOfWeek(element.dt)}</h3>
+            <img src="${dailyWeatherIcon}">
+            <p>${element.weather[0].main}</p>
+            <p class="min-max-temp">${Math.round(element.temp.max)}<sup>&#176;</sup> / ${Math.round(element.temp.min)}<sup>&#176;</sup><p>
+        </div>`
+    });
+
+    return dailyWeather;
+}
+
+// Generate markup for hourly weather data
+function generateHourly(data) {
+    let hourlyWeather = '';
+    // only grab first 24 hours of weather data
+    const hourlyWeatherData = data.hourly.slice(1, 23);
+
+    // loop through each element and append HTML to hourlyWeather
+    for (const element of hourlyWeatherData) {
+        const hourlyWeatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${element.weather[0].icon}.svg`;
+        
+        hourlyWeather +=
+        `<div class="hourly-weather-row">
+            <div class="hourly-temp">
+                <div>${getHour(element.dt)}</div>
+                <div>${Math.round(element.temp)}<sup>&#176;</sup></div>
+                <div class="hourly-description">
+                    <img src="${hourlyWeatherIcon}">
+                    <p>${capitalizeFirst(element.weather[0].description)}</p>
+                </div>
+            </div>
+            <div class="hourly-pop">
+                <i class="fas fa-tint"></i>${Math.round(element.pop * 100)}%
+            </div>
+        </div>
+        <hr>`
+    }
+
+    return hourlyWeather;
 }
 
 function getDayOfWeek(dt) {
@@ -244,7 +252,7 @@ function capitalizeFirst(string) {
 //     return `${days[day - 1]}, ${months[month]} ${date}`
 // }
 
-// event lsitener on enter to run functions
+// event listener on enter to run functions
 document.querySelector('.weather-input form').addEventListener('submit', (e) => {
     // remove keyboard on submit on mobile
     document.activeElement.blur();
