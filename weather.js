@@ -2,6 +2,39 @@
 
 const API_KEY = '8d806538f88014f91bc539358457b4a8';
 
+function getUserGeo() {
+
+    function success(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        console.log(lat, lon);
+        reverseGeoCode([lat, lon]);
+    }
+
+    function error() {
+        document.querySelector('.weather-container').textContent = 'Unable to retrieve data';
+    }
+
+    if(!navigator.geolocation) {
+        document.querySelector('.weather-container').textContent = 'Geolocation is not supported by your browser';
+    } else {
+        document.querySelector('.weather-container').textContent = 'Locating…';
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+}
+
+async function reverseGeoCode(coords) {
+    const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${coords[0]}&lon=${coords[1]}&limit=5&appid=${API_KEY}`);
+
+    const data = await response.json();
+    const location = data[0].name;
+    const countryCode = data[0].country;
+
+    getWeather(coords[0], coords[1], location, countryCode);
+}
+
+document.querySelector('#geo').addEventListener('click', getUserGeo);
+
 async function getCoordinates(city) {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
     
