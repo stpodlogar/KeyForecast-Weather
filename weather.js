@@ -24,7 +24,7 @@ function getUserGeo() {
 }
 
 async function reverseGeoCode(coords) {
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${coords[0]}&lon=${coords[1]}&limit=5&appid=${API_KEY}`);
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${coords[0]}&lon=${coords[1]}&limit=5&appid=${API_KEY}`);
 
     const data = await response.json();
     const location = data[0].name;
@@ -140,7 +140,7 @@ async function getWeather(lat, lon, location, countryCode) {
     `
 
     // reset results to empty
-    document.querySelector('.weather-container').textContent = '';
+    document.querySelector('.weather-container').textContent = 'Loading...';
     // insert html for desired location
     document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', markup);
 
