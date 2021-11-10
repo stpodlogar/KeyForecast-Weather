@@ -89,7 +89,7 @@ body {
 }
 
 .weather-input {
-    width: 400px;
+    width: 100%;
     padding: 0 0.75rem;
 }
 
@@ -340,19 +340,20 @@ button[data-toggle="collapse"] > i {
 }
 
 #location {
-    width: 85%;
-    height: 40px;
+    width: 100%;
+    height: 3em;
     padding: 5px 25px;
-    border: none;
+    border: 2px solid var(--bg_alt);
+    border-radius: 50px;
     color: var(--text_dark);
-    background-color: var(--bg_main);
-    border-bottom: 2px solid var(--text_light);
+    background-color: var(--bg_alt);
     transition: ease-in-out 0.2s;
+    box-shadow: 9px 9px 16px rgb(163 177 198 / 60%);
 }
 
 #location:focus {
     outline: none;
-    border-bottom: 2px solid var(--purple);
+    border: 2px solid var(--purple);
 }
 
 form {
@@ -361,22 +362,19 @@ form {
 
 form button {
     font-weight: bold;
-    height: 40px;
-    width: 40px;
-    border: none;
+    font-size: 16px;
+    height: 3em;
+    width: 5em;
+    border: 2px solid var(--purple);
     border-radius: 30px;
-    background: var(--bg_main);
-    color: var(--purple);
-    margin-left: auto;
-    transition: background ease-in-out 0.2s;
-    box-shadow: 
-        9px 9px 16px rgba(163,177,198,0.6), 
-        -9px -9px 16px rgba(255,255,255, 0.5);
+    background: var(--purple);
+    color: var(--text_light);
+    margin-left: 0.5em;
+    box-shadow: 9px 9px 16px rgba(163,177,198,0.6);
 }
 
 form button:hover {
     cursor: pointer;
-    background: rgb(0 0 0 / 5%);
 }
 
 .location-title h3 {
