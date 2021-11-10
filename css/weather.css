@@ -11,7 +11,7 @@
     --text_med: #53627c;
     --text-dark: #1e2432;
     --blue: #2196f3;
-    --darkblue: #4e54c8;
+    --purple: #4e54c8;
     --darkestblue: #000428;
     --error: #ff1e42;
 }
@@ -25,6 +25,56 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--text_dark);
+}
+
+.loading-icon {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15em;
+}
+
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  }
+  .lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: var(--purple);
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .lds-facebook div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+  }
+  .lds-facebook div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+  }
+  .lds-facebook div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+  }
+  @keyframes lds-facebook {
+    0% {
+      top: 8px;
+      height: 64px;
+    }
+    50%, 100% {
+      top: 24px;
+      height: 32px;
+    }
+  }
+
+.spinner {
+    background-color: red;
 }
 
 .app-container {
@@ -41,9 +91,11 @@ body {
 }
 
 .weather-container {
+    display: flex;
     width: 100%;
     margin-top: 25px;
-    place-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .instructions {
@@ -105,7 +157,7 @@ body {
 }
 
 .feels-like h3 {
-    color: var(--darkblue);
+    color: var(--purple);
 }
 
 .feels-like-attribute {
@@ -126,7 +178,7 @@ body {
 
 .feels-like-attribute .data-value {
     font-weight: 700;
-    color: var(--darkblue);
+    color: var(--purple);
 }
 
 .hi-lo {
@@ -138,7 +190,7 @@ body {
 .hi-lo div {
     display: inline-block;
     font-weight: 700;
-    color: var(--darkblue);
+    color: var(--purple);
     font-size: 1.25rem;
 }
 
@@ -178,7 +230,7 @@ button[data-toggle="collapse"] {
     z-index: 100;
     bottom: -2em;
     outline: none;
-    background-color: var(--darkblue);
+    background-color: var(--purple);
     color: var(--text_light);
     border: none;
 }
@@ -247,7 +299,7 @@ button[data-toggle="collapse"] > i {
 }
 
 .hourly-pop i {
-    color: var(--darkblue);
+    color: var(--purple);
 }
 
 .week-forecast {
@@ -274,11 +326,11 @@ button[data-toggle="collapse"] > i {
 }
 
 .forecast-day h3 {
-    color: var(--darkblue);
+    color: var(--purple);
 }
 
 .forecast-day .min-max-temp {
-    background: var(--darkblue);
+    background: var(--purple);
     color: #fff;
     padding: 0.2em 0.6em;
     border-radius: 50px;
@@ -299,7 +351,7 @@ button[data-toggle="collapse"] > i {
 
 #location:focus {
     outline: none;
-    border-bottom: 2px solid var(--darkblue);
+    border-bottom: 2px solid var(--purple);
 }
 
 form {
@@ -313,7 +365,7 @@ form button {
     border: none;
     border-radius: 30px;
     background: var(--bg_main);
-    color: var(--darkblue);
+    color: var(--purple);
     margin-left: auto;
     transition: background ease-in-out 0.2s;
     box-shadow: 
@@ -333,7 +385,7 @@ form button:hover {
 }
 
 .location-title h3 sup{
-    background: var(--darkblue);
+    background: var(--purple);
     color: var(--text_light);
     font-size: 0.3em;
     padding: 0.2em 0.6em;

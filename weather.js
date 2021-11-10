@@ -18,7 +18,8 @@ function getUserGeo() {
     if(!navigator.geolocation) {
         document.querySelector('.weather-container').textContent = 'Geolocation is not supported by your browser';
     } else {
-        document.querySelector('.weather-container').textContent = 'Locating…';
+        document.querySelector('.weather-container').textContent = '';
+        document.querySelector('.loading-icon').style.display = 'flex';
         navigator.geolocation.getCurrentPosition(success, error);
     }
 }
@@ -52,6 +53,8 @@ async function getCoordinates(city) {
     const location = data.name;
     const countryCode = data.sys.country; 
 
+    document.querySelector('.weather-container').textContent = '';
+    document.querySelector('.loading-icon').style.display = 'flex';
     getWeather(lat, lon, location, countryCode);
 }
 
@@ -140,7 +143,9 @@ async function getWeather(lat, lon, location, countryCode) {
     `
 
     // reset results to empty
-    document.querySelector('.weather-container').textContent = 'Loading...';
+    document.querySelector('.weather-container').textContent = '';
+    // remove loading icon
+    document.querySelector('.loading-icon').style.display = 'none';
     // insert html for desired location
     document.querySelector('.weather-container').insertAdjacentHTML('afterbegin', markup);
 
