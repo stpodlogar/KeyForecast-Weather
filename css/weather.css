@@ -17,6 +17,8 @@
     --error: #ff1e42;
 }
 
+/* || GENERAL STYLES */
+
 html {
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='900' preserveAspectRatio='none' viewBox='0 0 1440 900'%3e%3cg mask='url(%26quot%3b%23SvgjsMask4578%26quot%3b)' fill='none'%3e%3crect width='1440' height='900' x='0' y='0' fill='url(%23SvgjsLinearGradient4579)'%3e%3c/rect%3e%3cpath d='M1488 900L0 900 L0 506.83Q-5.04 381.79%2c 120 376.76Q183.24 320%2c 240 383.24Q310.11 381.35%2c 312 451.46Q394.67 414.13%2c 432 496.79Q480.56 425.36%2c 552 473.92Q567.27 417.19%2c 624 432.46Q697.2 385.66%2c 744 458.87Q843.24 438.11%2c 864 537.35Q895.58 448.93%2c 984 480.5Q1062.25 438.75%2c 1104 517Q1182.09 523.09%2c 1176 601.18Q1172.95 478.13%2c 1296 475.09Q1316.8 375.89%2c 1416 396.69Q1458.48 367.17%2c 1488 409.65z' fill='rgba(238%2c 247%2c 254%2c 1)'%3e%3c/path%3e%3cpath d='M1464 900L0 900 L0 556.18Q56.47 540.64%2c 72 597.11Q168.01 573.12%2c 192 669.13Q238.45 595.58%2c 312 642.03Q370.39 628.42%2c 384 686.82Q411.77 642.6%2c 456 670.37Q511.93 654.3%2c 528 710.22Q619.6 681.82%2c 648 773.41Q664.28 717.69%2c 720 733.98Q759.72 653.7%2c 840 693.42Q867.62 649.03%2c 912 676.65Q928.21 572.86%2c 1032 589.06Q1098.93 535.99%2c 1152 602.93Q1198.31 529.24%2c 1272 575.55Q1362.15 545.7%2c 1392 635.86Q1493.28 665.14%2c 1464 766.42z' fill='rgba(219%2c 238%2c 253%2c 1)'%3e%3c/path%3e%3cpath d='M1512 900L0 900 L0 949.43Q-4.97 824.46%2c 120 819.49Q137.1 716.59%2c 240 733.69Q312.97 686.66%2c 360 759.64Q401.82 729.46%2c 432 771.29Q519.97 739.25%2c 552 827.22Q601.97 757.19%2c 672 807.17Q674.66 737.83%2c 744 740.49Q881.09 805.58%2c 816 942.66Q787.51 794.17%2c 936 765.69Q977.9 687.59%2c 1056 729.49Q1115.21 716.7%2c 1128 775.92Q1212.52 788.44%2c 1200 872.96Q1265.68 818.64%2c 1320 884.32Q1393.92 838.24%2c 1440 912.16Q1452.53 852.68%2c 1512 865.21z' fill='rgba(200%2c 229%2c 252%2c 1)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask4578'%3e%3crect width='1440' height='900' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='0%25' x2='50%25' y2='100%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient4579'%3e%3cstop stop-color='rgba(238%2c 247%2c 254%2c 1)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(200%2c 229%2c 252%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e") no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -30,55 +32,7 @@ body {
     color: var(--text_dark);
 }
 
-.loading-icon {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    margin-top: 15em;
-}
-
-.lds-facebook {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto;
-  }
-  .lds-facebook div {
-    display: inline-block;
-    position: absolute;
-    left: 8px;
-    width: 16px;
-    background: var(--purple);
-    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-  }
-  .lds-facebook div:nth-child(1) {
-    left: 8px;
-    animation-delay: -0.24s;
-  }
-  .lds-facebook div:nth-child(2) {
-    left: 32px;
-    animation-delay: -0.12s;
-  }
-  .lds-facebook div:nth-child(3) {
-    left: 56px;
-    animation-delay: 0;
-  }
-  @keyframes lds-facebook {
-    0% {
-      top: 8px;
-      height: 64px;
-    }
-    50%, 100% {
-      top: 24px;
-      height: 32px;
-    }
-  }
-
-.spinner {
-    background-color: red;
-}
+/* || LAYOUT */
 
 .app-container {
     display: flex;
@@ -88,17 +42,9 @@ body {
     flex-flow: row wrap;
 }
 
-.weather-input {
-    width: 100%;
-    padding: 0 0.75rem;
-}
-
-.weather-container {
-    display: flex;
-    width: 100%;
-    margin-top: 25px;
-    justify-content: center;
-    flex-direction: column;
+.instructions .search-image {
+    width: 50%;
+    margin: 3rem 0;
 }
 
 .instructions {
@@ -110,9 +56,67 @@ body {
     margin-top: 4rem;
 }
 
-.instructions .search-image {
-    width: 50%;
-    margin: 3rem 0;
+/* || HEADER AND SEARCH BAR */
+
+.weather-input {
+    width: 100%;
+    padding: 0 0.75rem;
+}
+
+#location {
+    width: 100%;
+    height: 3em;
+    padding: 5px 25px;
+    border: 2px solid var(--bg_alt);
+    border-radius: 50px;
+    color: var(--text_dark);
+    background-color: var(--bg_alt);
+    transition: ease-in-out 0.2s;
+    box-shadow: 9px 9px 16px rgb(163 177 198 / 60%);
+}
+
+#location:focus {
+    outline: none;
+    border: 2px solid var(--purple);
+}
+
+form {
+    display: flex;
+}
+
+form button {
+    font-weight: bold;
+    font-size: 16px;
+    height: 3em;
+    width: 5em;
+    border: 2px solid var(--purple);
+    border-radius: 30px;
+    background: var(--purple);
+    color: var(--text_light);
+    margin-left: 0.5em;
+    box-shadow: 9px 9px 16px rgba(163,177,198,0.6);
+}
+
+form button:hover {
+    cursor: pointer;
+}
+
+.error {
+    color: var(--error);
+    font-weight: 100;
+    font-size: 1rem;
+    margin-top: 5px;
+    padding-left: 25px;
+}
+
+/* || WEATHER CONTENTS */
+
+.weather-container {
+    display: flex;
+    width: 100%;
+    margin-top: 25px;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .weather-results {
@@ -128,18 +132,6 @@ body {
     font-weight: 400;
     margin-bottom: 15px;
 }
-
-/* .weather-results::after {
-    content: '';
-    width: 98%;
-    height: 035px;
-    position: absolute;
-    left: 1%;
-    z-index: -1;
-    opacity: 0.4;
-    border-radius: 20px;
-    background: var(--darkestblue);
-} */
 
 .weather-data {
     width: 80%;
@@ -339,44 +331,6 @@ button[data-toggle="collapse"] > i {
     font-size: 14px;
 }
 
-#location {
-    width: 100%;
-    height: 3em;
-    padding: 5px 25px;
-    border: 2px solid var(--bg_alt);
-    border-radius: 50px;
-    color: var(--text_dark);
-    background-color: var(--bg_alt);
-    transition: ease-in-out 0.2s;
-    box-shadow: 9px 9px 16px rgb(163 177 198 / 60%);
-}
-
-#location:focus {
-    outline: none;
-    border: 2px solid var(--purple);
-}
-
-form {
-    display: flex;
-}
-
-form button {
-    font-weight: bold;
-    font-size: 16px;
-    height: 3em;
-    width: 5em;
-    border: 2px solid var(--purple);
-    border-radius: 30px;
-    background: var(--purple);
-    color: var(--text_light);
-    margin-left: 0.5em;
-    box-shadow: 9px 9px 16px rgba(163,177,198,0.6);
-}
-
-form button:hover {
-    cursor: pointer;
-}
-
 .location-title h3 {
     font-size: 2.5rem;
     color: var(--text_med);
@@ -415,17 +369,55 @@ form button:hover {
     font-weight: 200;
 }
 
-.error {
-    color: var(--error);
-    font-weight: 100;
-    font-size: 1rem;
-    margin-top: 5px;
-    padding-left: 25px;
+/* || LOADING STYLES */
+
+.loading-icon {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15em;
 }
 
-/* .data-value {
-    margin-left: 20px;
-} */
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  }
+  .lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: var(--purple);
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .lds-facebook div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+  }
+  .lds-facebook div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+  }
+  .lds-facebook div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+  }
+  @keyframes lds-facebook {
+    0% {
+      top: 8px;
+      height: 64px;
+    }
+    50%, 100% {
+      top: 24px;
+      height: 32px;
+    }
+  }
+
+/* ------------------------------------------------------------------------------------------------------------------------------ */
 
 /* Prevent auto zoom on mobile */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
