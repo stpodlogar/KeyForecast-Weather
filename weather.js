@@ -1,6 +1,6 @@
 'use strict'
 
-const API_KEY = '8d806538f88014f91bc539358457b4a8';
+const API_KEY = process.env.API_KEY;
 
 function getUserGeo() {
 
