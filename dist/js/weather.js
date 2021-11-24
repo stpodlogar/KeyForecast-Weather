@@ -3,9 +3,9 @@
 const getUserGeo = () => {
 
     function success(position) {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        reverseGeoCode([lat, lon]);
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        reverseGeoCode([latitude, longitude]);
     }
 
     function error() {
@@ -23,8 +23,8 @@ const getUserGeo = () => {
 
 const reverseGeoCode = async (coords) => {
     const urlDataObj = {
-        lat: coords[0],
-        lon: coords[1]
+        latitude: coords[0],
+        longitude: coords[1]
     };
     try {
         const response = await fetch("./.netlify/functions/reverse_geo", {
@@ -32,12 +32,8 @@ const reverseGeoCode = async (coords) => {
             body: JSON.stringify(urlDataObj)
         });
         const data = await response.json();
-
-        const lat = coords[0];
-        const lon = coords[1];
-        const location = data[0].name;
-        const countryCode = data[0].country;
-        getWeather(lat, lon, location, countryCode);
+        const location = `${data[0].name}, ${data[0].country}`;
+        getWeather(coords, location);
     } catch (err) {
         console.log(err)
         removeLoadingIcon();
@@ -45,35 +41,10 @@ const reverseGeoCode = async (coords) => {
     };
 }
 
-const getCoordinates = async (city) => {
+const getWeather = async (coords, location) => {
     const urlDataObj = {
-        city: city
-    };
-    try {
-        const response = await fetch("./.netlify/functions/get_coords", {
-            method: "POST",
-            body: JSON.stringify(urlDataObj)
-        });
-        const data = await response.json();
-
-        const lat = data.coord.lat;
-        const lon = data.coord.lon;
-        const location = data.name;
-        const countryCode = data.sys.country; 
-
-        document.querySelector('.error').textContent = '';
-        displayLoadingIcon();
-        getWeather(lat, lon, location, countryCode);
-    } catch (err) {
-        console.log(err);
-        document.querySelector('.error').textContent = 'Please enter a valid city';
-    };
-}
-
-const getWeather = async (lat, lon, location, countryCode) => {
-    const urlDataObj = {
-        lat: lat,
-        lon: lon
+        latitude: coords[0],
+        longitude: coords[1]
     };
     try {
         const response = await fetch("./.netlify/functions/get_weather", {
@@ -81,6 +52,8 @@ const getWeather = async (lat, lon, location, countryCode) => {
             body: JSON.stringify(urlDataObj)
         });
         const data = await response.json();
+        console.log(location);
+        console.log(data)
 
         // API data
         const temp = Math.round(data.current.temp);
@@ -102,7 +75,7 @@ const getWeather = async (lat, lon, location, countryCode) => {
                 <article class="weather-data">
                     <section>
                         <div class="location-title">
-                            <h3><span>${location}</span><sup>${countryCode}</sup></h3>
+                            <h3><span>${location}</span></h3>
                         </div>
                         <div style="display: flex; align-items: center; justify-content: center">
                             <div class="location-conditions" style="display: inline">
@@ -223,7 +196,7 @@ const generateDaily = (data) => {
             <h3>${getDayOfWeek(element.dt)}</h3>
             <img src="${dailyWeatherIcon}">
             <p>${element.weather[0].main}</p>
-            <p class="min-max-temp">${Math.round(element.temp.max)}<sup>&#176;</sup> / ${Math.round(element.temp.min)}<sup>&#176;</sup><p>
+            <p class="min-max-temp">${Math.round(element.temp.max)}<sup>&#176;</sup> | ${Math.round(element.temp.min)}<sup>&#176;</sup><p>
         </div>`
     });
 
@@ -310,6 +283,29 @@ const capitalizeFirst = (string) => {
 //     return `${days[day - 1]}, ${months[month]} ${date}`
 // }
 
+let autocomplete;
+function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'), 
+        {
+            types: ['(cities)'],
+            fields: ['geometry', 'formatted_address']
+        });
+    autocomplete.addListener('place_changed', onPlaceChanged);
+}
+
+function onPlaceChanged() {
+    const place = autocomplete.getPlace();
+
+    if (!place.geometry) {
+        document.getElementById('autocomplete').placeholder = 'Enter a place...';
+    } else {
+        const latitude = place.geometry.location.lat();
+        const longitude = place.geometry.location.lng();
+        getWeather([latitude, longitude], place.formatted_address);
+    }
+}
+
 const displayLoadingIcon = () => {
     document.querySelector('.weather-container').textContent = '';
     document.querySelector('.loading-icon').style.display = 'flex';
@@ -325,8 +321,9 @@ document.querySelector('.weather-input form').addEventListener('submit', (e) => 
     // remove keyboard on submit on mobile
     document.activeElement.blur();
     e.preventDefault();
-    let userLocation =  document.querySelector('#location');
-    getCoordinates(userLocation.value);
 })
 
-document.querySelector('#geo').addEventListener('click', getUserGeo);
+document.querySelector('#geo').addEventListener('click', () => {
+    document.querySelector('#autocomplete').value = '';
+    getUserGeo();
+});

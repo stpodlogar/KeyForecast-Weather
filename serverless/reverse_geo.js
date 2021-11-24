@@ -4,8 +4,8 @@ const { API_KEY } = process.env;
 
 exports.handler = async (event, context) => {
     const params = JSON.parse(event.body);
-    const { lat, lon } = params;
-    const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${API_KEY}`;
+    const { latitude, longitude } = params;
+    const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=${API_KEY}`;
     try {
         const response = await fetch(url);
         const data = await response.json();

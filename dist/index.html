@@ -21,13 +21,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png">
     <link rel="manifest" href="public/site.webmanifest">
 
+    <!-- Google Places -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjVRD_VwmDTm0tMk_O5g9vvJYq6mvcm4Q&libraries=places&callback=initAutocomplete" defer async>
+    </script>
+
 </head>
 <body>
     <div class="app-container">
         <header class="weather-input">
             <form>
-                <input type="text" id="location" placeholder="Search Location..." autocomplete="off"/>
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                <input type="text" id="autocomplete" placeholder="Search Location..." autocomplete="off"/>
+                <!-- <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button> -->
                 <button type="button" aria-label="Geo Location" id="geo"><i class="fas fa-map-marker-alt"></i></button>
             </form>
             <p class="error"></p>
