@@ -40,11 +40,13 @@ body {
     max-width: 768px;
     margin: 50px auto;
     flex-flow: row wrap;
+    padding: 0.75rem;
 }
 
 .instructions .search-image {
-    width: 50%;
-    margin: 3rem 0;
+    width: 300px;
+    height: 100%;
+    margin-bottom: 1em;
 }
 
 .instructions {
@@ -53,14 +55,37 @@ body {
     align-items: center;
     flex-direction: column;
     text-align: center;
-    margin-top: 4rem;
+    background: var(--bg_alt);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+    padding: 2em;
+    height: 350px;
 }
 
 /* || HEADER AND SEARCH BAR */
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2.5em;
+    color: var(--text_med);
+}
+
+header i {
+    text-decoration: none;
+    font-size: 2em;
+    color: var(--text_med);
+}
+
+header i:hover {
+    color: var(--purple);
+}
+
 .weather-input {
     width: 100%;
-    padding: 0 0.75rem;
+    /* padding: 0 0.75rem; */
 }
 
 #autocomplete {
@@ -147,7 +172,6 @@ form button:hover {
     background: var(--bg_alt);
     border-radius: 10px;
     padding: 1.5rem 1rem;
-    margin: 0 0.75rem;
     /* box-shadow: 9px 9px 16px rgba(163,177,198,0.6); */
     box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
 }
@@ -359,6 +383,7 @@ button[data-toggle="collapse"] > i {
     font-size: 1.5rem;
     color: var(--text_med);
     font-weight: 400;
+    max-width: 300px;
 }
 
 .location-title h3 sup{

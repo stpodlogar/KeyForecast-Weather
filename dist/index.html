@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Weather app using Google Places autocomplete and OpenWeather API.">
     <title>KeyForecast</title>
 
     <link href="css/weather.css" rel="stylesheet">
@@ -29,27 +30,32 @@
 </head>
 <body>
     <div class="app-container">
-        <header class="weather-input">
+        <header>
+            <h1>KeyForecast Weather</h1>
+            <a href="https://github.com/stpodlogar/KeyForecast-Weather" rel="noopener norefferer" target="_blank" aria-label="Github">
+                <i class="fab fa-github"></i>
+            </a>
+        </header>
+        <section class="weather-input">
             <form>
                 <input type="text" id="autocomplete" placeholder="Search Location..." autocomplete="off"/>
                 <!-- <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button> -->
                 <button type="button" aria-label="Geo Location" id="geo"><i class="fas fa-map-marker-alt"></i></button>
             </form>
             <p class="error"></p>
-        </header>
+        </section>
         <div class="loading-icon">
             <div class="lds-facebook"><div></div><div></div><div></div></div>
             <p style="text-align: center;">Loading Weather...</p>
         </div>
         <section class="weather-container">
             <div class="instructions">
-                <p>Please enter the city name followed by a comma and the two letter country code.<br>e.g. New York, US</p>
-                <!-- <img class="search-image" src="https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/Artboard+1.svg" alt="Search SVG">
-                <p>Waiting to Search!</p> -->
+                <!-- <p>Please search for a location or use your current location.</p> -->
+                <img class="search-image" src="https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/Search+engine+_Monochromatic.svg" alt="Search SVG">
+                <p>Waiting to search!</p>
             </div>
         </section>
     </div>
-
     <script src="js/weather.js"></script>
 </body>
 </html>

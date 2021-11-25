@@ -52,8 +52,6 @@ const getWeather = async (coords, location) => {
             body: JSON.stringify(urlDataObj)
         });
         const data = await response.json();
-        console.log(location);
-        console.log(data)
 
         // API data
         const temp = Math.round(data.current.temp);
@@ -302,6 +300,7 @@ function onPlaceChanged() {
     } else {
         const latitude = place.geometry.location.lat();
         const longitude = place.geometry.location.lng();
+        displayLoadingIcon();
         getWeather([latitude, longitude], place.formatted_address);
     }
 }
@@ -322,6 +321,9 @@ document.querySelector('.weather-input form').addEventListener('submit', (e) => 
     document.activeElement.blur();
     e.preventDefault();
 })
+
+// on page load request for user location
+// document.addEventListener('DOMContentLoaded', getUserGeo);
 
 document.querySelector('#geo').addEventListener('click', () => {
     document.querySelector('#autocomplete').value = '';
