@@ -22,11 +22,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png">
     <link rel="manifest" href="public/site.webmanifest">
 
-    <!-- Google Places -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjVRD_VwmDTm0tMk_O5g9vvJYq6mvcm4Q&libraries=places&callback=initAutocomplete" defer async>
-    </script>
-
 </head>
 <body>
     <div class="app-container">
@@ -37,13 +32,11 @@
             </a>
         </header>
         <section class="weather-input">
-            <form>
-                <input type="text" id="autocomplete" placeholder="Search Location..." autocomplete="off"/>
-                <!-- <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button> -->
-                <button type="button" aria-label="Geo Location" id="geo"><i class="fas fa-map-marker-alt"></i></button>
-            </form>
-            <p class="error"></p>
+            <div class="fas fa-search"></div>
+            <input type="text" id="autocomplete" placeholder="Search for a city" autocomplete="off"/>
+            <div id="geo" class="fas fa-map-marker-alt"></div>
         </section>
+        <p class="error"></p>
         <div class="loading-icon">
             <div class="lds-facebook"><div></div><div></div><div></div></div>
             <p style="text-align: center;">Loading Weather...</p>
@@ -56,6 +49,13 @@
             </div>
         </section>
     </div>
+
+    <!-- Custom JS -->
     <script src="js/weather.js"></script>
+
+    <!-- Google Places -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjVRD_VwmDTm0tMk_O5g9vvJYq6mvcm4Q&libraries=places&callback=initAutocomplete" defer async>
+    </script>
 </body>
 </html>

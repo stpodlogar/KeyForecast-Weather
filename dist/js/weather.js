@@ -300,6 +300,9 @@ function onPlaceChanged() {
     } else {
         const latitude = place.geometry.location.lat();
         const longitude = place.geometry.location.lng();
+
+        // remove keyboard on submit on mobile
+        document.activeElement.blur();
         displayLoadingIcon();
         getWeather([latitude, longitude], place.formatted_address);
     }
@@ -316,11 +319,11 @@ const removeLoadingIcon = () => {
 }
 
 // event listener on enter to run functions
-document.querySelector('.weather-input form').addEventListener('submit', (e) => {
-    // remove keyboard on submit on mobile
-    document.activeElement.blur();
-    e.preventDefault();
-})
+// document.querySelector('.weather-input form').addEventListener('submit', (e) => {
+//     // remove keyboard on submit on mobile
+//     document.activeElement.blur();
+//     e.preventDefault();
+// })
 
 // on page load request for user location
 // document.addEventListener('DOMContentLoaded', getUserGeo);
