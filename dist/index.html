@@ -34,7 +34,9 @@
         <section class="weather-input">
             <div class="fas fa-search"></div>
             <input type="text" id="autocomplete" placeholder="Search for a city" autocomplete="off"/>
-            <div id="geo" class="fas fa-map-marker-alt"></div>
+            <div id="geo" class="fas fa-map-marker-alt tooltip">
+                <span class="tooltiptext">Use current location</span>
+            </div>
         </section>
         <p class="error"></p>
         <div class="loading-icon">
@@ -51,7 +53,7 @@
     </div>
 
     <!-- Custom JS -->
-    <script src="js/weather.js"></script>
+    <script defer async src="js/weather.js"></script>
 
     <!-- Google Places -->
     <script
