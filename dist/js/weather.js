@@ -177,6 +177,8 @@ const getWeather = async (coords, location) => {
         }
     } catch (err) {
         console.log(err)
+        removeLoadingIcon();
+        document.querySelector('.weather-container').textContent = 'Unable to retrieve weather';
     };
 
 }
