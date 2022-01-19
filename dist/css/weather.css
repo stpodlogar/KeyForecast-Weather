@@ -32,6 +32,11 @@ body {
     color: var(--text_dark);
 }
 
+:focus-visible {
+    outline: 2px solid darkorange;
+    color: inherit;
+}
+
 /* || LAYOUT */
 
 .app-container {
@@ -112,6 +117,12 @@ header i:hover {
     outline: none;
 }
 
+.weather-input button {
+    font-size: 1.5em;
+    border: none;
+    background: none;
+}
+
 .weather-input div {
     font-size: 1.5em;
     color: var(--text_med);
@@ -169,25 +180,29 @@ header i:hover {
     border-radius: 6px;
     font-size: 0.5em;
     font-weight: 400;
-    margin-top: 0.75em;
+    margin-top: 1.25em;
    
     /* Position the tooltip text */
     top: 100%;
     left: 50%;
-    margin-left: -70px;
+    margin-left: -115px;
     position: absolute;
     z-index: 1;
 }
 
-.tooltip .tooltiptext::after {
+/* .tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
-    bottom: 100%;  /* At the top of the tooltip */
+    bottom: 100%;  At the top of the tooltip
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent black transparent;
+} */
+
+.tooltip:focus-visible .tooltiptext {
+    visibility: visible;
 }
 
 .tooltip:hover .tooltiptext {
@@ -307,7 +322,6 @@ button[data-toggle="collapse"] {
     border-radius: 5px;
     z-index: 100;
     bottom: -2em;
-    outline: none;
     background-color: var(--purple);
     color: var(--text_light);
     border: none;

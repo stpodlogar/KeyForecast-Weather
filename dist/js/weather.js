@@ -332,5 +332,6 @@ const removeLoadingIcon = () => {
 
 document.querySelector('#geo').addEventListener('click', () => {
     document.querySelector('#autocomplete').value = '';
+    document.querySelector('#geo').blur();
     getUserGeo();
 });
