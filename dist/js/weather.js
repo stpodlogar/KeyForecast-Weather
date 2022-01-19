@@ -53,16 +53,14 @@ const getWeather = async (coords, location) => {
         });
         const data = await response.json();
 
-        // API data
-        const temp = Math.round(data.current.temp);
-        const conditions = data.current.weather[0].description;
-        const weatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${data.current.weather[0].icon}.svg`;
-        const humidity = data.current.humidity;
-        const feelsLike = Math.round(data.current.feels_like);
-        const pressure = data.current.pressure;
-        const wind = Math.round(data.current.wind_speed);
-        const currentHi = Math.round(data.daily[0].temp.max);
-        const currentLo = Math.round(data.daily[0].temp.min);
+        // API Data
+        const { 
+            current: { temp, humidity, feels_like, pressure, wind_speed, 
+            weather: { 0: { description, icon } } }, 
+            daily: { 0: { temp: { max, min } } }
+        } = data;
+
+        const weatherIcon = `https://weather-icons-stpodlogar.s3.us-east-2.amazonaws.com/${icon}.svg`;
 
         // Markup to be rendered on screen
         let markup = 
@@ -80,16 +78,16 @@ const getWeather = async (coords, location) => {
                                 <img src=${weatherIcon}>
                             </div>
                             <div class="location-temp" style="display: inline">
-                                ${temp}<sup>&#176;</sup>
+                                ${Math.round(temp)}<sup>&#176;</sup>
                             </div>
                         </div>
-                        <p>${conditions.toUpperCase()}</p>
+                        <p>${description.toUpperCase()}</p>
                     </section>
                     <section class="feels-like">
-                        <h3>Feels like ${feelsLike}<sup>&#176;</sup></h3>
+                        <h3>Feels like ${Math.round(feels_like)}<sup>&#176;</sup></h3>
                         <div class="hi-lo">
-                            <div><i class="fas fa-arrow-up"></i>${currentHi}<sup>&#176;</sup></div>
-                            <div><i class="fas fa-arrow-down"></i>${currentLo}<sup>&#176;</sup></div>
+                            <div><i class="fas fa-arrow-up"></i>${Math.round(max)}<sup>&#176;</sup></div>
+                            <div><i class="fas fa-arrow-down"></i>${Math.round(min)}<sup>&#176;</sup></div>
                         </div>
                         <div class="feels-like-attribute">
                             <div>
@@ -101,7 +99,7 @@ const getWeather = async (coords, location) => {
                             <div>
                                 <i class="fas fa-wind"></i>Wind
                             </div>
-                            <span class="data-value">${wind}mph</span>
+                            <span class="data-value">${Math.round(wind_speed)}mph</span>
                         </div>
                         <div class="feels-like-attribute">
                             <div>
